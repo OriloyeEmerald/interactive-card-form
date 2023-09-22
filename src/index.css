@@ -10,10 +10,10 @@
 
 .front-card {
   position: absolute;
-  top: 180px;
+  top: 135px;
   background: url("./assets/images/bg-card-front.png") no-repeat center/cover;
-  height: 230px;
-  width: 320px;
+  height: 150px;
+  width: 250px;
   border-radius: 10px;
   z-index: 20;
 }
@@ -22,8 +22,8 @@
   position: absolute;
   right: 20px;
   background: url("./assets/images/bg-card-back.png") no-repeat center/cover;
-  height: 230px;
-  width: 320px;
+  height: 150px;
+  width: 250px;
   border-radius: 10px;
 }
 
@@ -33,7 +33,7 @@
 
 form,
 .thank-you {
-  margin-top: 350px;
+  margin-top: 250px;
 }
 
 form label {
