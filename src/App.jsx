@@ -38,6 +38,13 @@ import { format } from "date-fns";
   }
 }
 
+const handleInputYear = (e) => {
+  const inputValue = e.target.value;
+    if (inputValue.length <= 2) {
+      setYear(inputValue);
+    }
+}
+
   const handleConfirm = () => {
     if (!name || !cardNumber || !month || !year || !cvc) {
       alert("Please fill in all fields");
@@ -146,6 +153,7 @@ import { format } from "date-fns";
                   <div className="shrink w-[80px]">
                     
                     <input
+                      className="text-center"
                       type="text"
                       name="expiry_month"
                       id="expiry_month"
@@ -158,6 +166,7 @@ import { format } from "date-fns";
                   </div>
                   <div className="shrink w-[80px] ">
                     <input
+                      className="text-center"
                       type="number"
                       name="expiry_year"
                       id="expiry_year"
@@ -165,7 +174,7 @@ import { format } from "date-fns";
                       maxLength={2}
                       required
                       value={year}
-                      onChange={(e) => {setYear(e.target.value)}}
+                      onChange={handleInputYear}
                     />
                   </div>
                   </div>
