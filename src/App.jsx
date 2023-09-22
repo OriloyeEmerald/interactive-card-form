@@ -39,11 +39,15 @@ import { format } from "date-fns";
 }
 
   const handleConfirm = () => {
-    setConfirmed(true);
+    if (!name || !cardNumber || !month || !year || !cvc) {
+      alert("Please fill in all fields");
+    } else {
+      setConfirmed(true);
+    }
     setConfirmedName(name);
     setConfirmedCardNumber(cardNumber);
     setConfirmedMonth(month);
-    setConfirmedYear(year);
+    setConfirmedYear('/' + year);
     setConfirmedCvc(cvc);
     setName('');
     setCardNumber('');
