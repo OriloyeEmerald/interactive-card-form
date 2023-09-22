@@ -9,9 +9,37 @@ import { format } from "date-fns";
  function App() {
   const [confirmed, setConfirmed] = useState(false);
   const [name, setName] = useState("");
-  const [cardNumber, setCardNumber] = useState('');
+  const [cardNumber, setCardNumber] = useState("");
   const [date, setDate] = useState("01/23");
   const [cvc, setCvc] = useState("");
+  const [confirmedName, setConfirmedName] = useState("jane appleseed");
+  const [confirmedCardNumber, setConfirmedCardNumber] = useState('0000 0000 0000');
+  const [confirmedDate, setConfirmedDate] = useState("01/23");
+  const [confirmedCvc, setConfirmedCvc] = useState("000");
+
+ const handleCvc = (e) => {
+  const value = e.target.value.replace(/\D/g, '').substring(0, 3);
+    setCvc(value);
+ }
+  const handleConfirm = () => {
+    setConfirmed(true);
+    setConfirmedName(name);
+    setConfirmedCardNumber(cardNumber);
+    setConfirmedDate(date);
+    setConfirmedCvc(cvc);
+    setName('');
+    setCardNumber('');
+    setDate('01/23');
+    setCvc('');
+  };
+
+  const handleContinue = () => {
+    setConfirmed(false);
+    setConfirmedName('jane appleseed');
+    setConfirmedCardNumber('0000 0000 0000');
+    setConfirmedDate("01/23");
+    setConfirmedCvc("000");
+  };
 
   return (
     <>
@@ -29,15 +57,15 @@ import { format } from "date-fns";
               <img src={logo} alt="" className="w-20 lg:w-28" />
 
               <div>
-                <h2 className="text-white text-xl lg:text-2xl mb-6 tracking-widest">
-                  {cardNumber}
+                <h2 className="text-white text-[.8rem] lg:text-2xl mb-[.4rem] tracking-widest">
+                  {confirmedCardNumber}
                 </h2>
 
                 <ul className="flex items-center justify-between">
-                  <li className="text-white uppercase text-base lg:text-xl tracking-widest">
-                    {name}
+                  <li className="text-white uppercase text-[.6rem] lg:text-xl tracking-widest">
+                    {confirmedName}
                   </li>
-                  <li className="text-white text-base lg:text-xl tracking-widest">
+                  <li className="text-white text-[.6rem] lg:text-xl tracking-widest">
                     {format(new Date(date), "MM/yy")}
                   </li>
                 </ul>
@@ -45,8 +73,8 @@ import { format } from "date-fns";
             </article>
 
             <article className="back-card relative lg:ml-20">
-              <p className="absolute right-10 text-lg lg:text-xl text-white tracking-widest">
-                {cvc}
+              <p className="absolute right-10 text-[.9rem] lg:text-xl text-black tracking-widest">
+                {confirmedCvc}
               </p>
             </article>
           </div>
@@ -93,7 +121,7 @@ import { format } from "date-fns";
                       id="expiry_date"
                       placeholder="MM YY"
                       required
-                      value={date}
+                      value={confirmedDate}
                       onChange={(e) => setDate(e.target.value)}
                     />
                   </div>
@@ -108,18 +136,18 @@ import { format } from "date-fns";
                       maxLength={3}
                       required
                       value={cvc}
-                      onChange={(e) => setCvc(e.target.value)}
+                      onChange={handleCvc}
                     />
                   </div>
                 </article>
 
-                <button onClick={() => setConfirmed(true)} className="btn">
+                <button onClick={handleConfirm} className="btn">
                   Confirm
                 </button>
               </form>
             )}
 
-            {confirmed && <ThankYou setConfirmed={setConfirmed} />}
+            {confirmed && <ThankYou handleContinue={handleContinue} />}
           </div>
         </div>
       </section>
@@ -127,7 +155,7 @@ import { format } from "date-fns";
   );
 }
 
-function ThankYou({ setConfirmed }) {
+function ThankYou({ handleContinue }) {
   return (
     <>
       <div className="thank-you flex flex-col items-center justify-center lg:h-screen max-w-lg mx-auto">
@@ -139,7 +167,7 @@ function ThankYou({ setConfirmed }) {
           We've added your card details
         </p>
         <button
-          onClick={() => setConfirmed(false)}
+          onClick={handleContinue}
           className="btn block mx-auto mt-10 w-full"
         >
           Continue
